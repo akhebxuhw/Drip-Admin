@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Drip Hub · Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="bg"></div>
+
+<!-- Login -->
+<div id="gate" class="gate">
+  <div class="gbox glass">
+    <div class="lockico"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg></div>
+    <h2>Admin</h2>
+    <p class="muted">Sign in to continue</p>
+    <form id="gForm">
+      <input id="gEmail" type="email" placeholder="Email" autocomplete="username" required>
+      <input id="gIn" type="password" placeholder="Password" autocomplete="current-password" required>
+      <button class="btn" id="gGo">Sign in</button>
+    </form>
+    <p id="gErr" class="gerr"></p>
+  </div>
+</div>
+
+<!-- App -->
+<div id="app" class="app hidden">
+  <header class="bar glass">
+    <div class="logo">DRIP<span>HUB</span><em>ADMIN</em></div>
+    <div class="barr"><span id="conn" class="conn">…</span><button id="lock" class="pill glass">Sign out</button></div>
+  </header>
+
+  <nav class="tabs glass">
+    <button id="tabDash" class="tab on" data-v="dash">Dashboard</button>
+    <button id="tabOrd" class="tab" data-v="ord">Orders <b id="ordBadge" class="badge hidden">0</b></button>
+  </nav>
+
+  <main>
+    <div id="err" class="errbox glass hidden">
+      <p id="errMsg"></p><small id="errDet"></small>
+      <button id="errRetry" class="btn sm">Retry</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="vDash" class="view">
+      <section class="panel glass">
+        <h3>Brands &amp; categories</h3>
+        <form id="brandForm" class="row">
+          <input id="brandName" placeholder="Brand name (e.g. Nike)" required>
+          <button class="btn sm">Add brand</button>
+        </form>
+        <div id="brandList"></div>
+      </section>
+
+      <section class="panel glass">
+        <h3>Add product</h3>
+        <form id="prodForm" class="form">
+          <label class="drop" id="drop">
+            <input type="file" id="pImg" accept="image/*" hidden>
+            <img id="pPrev" class="hidden" alt="">
+            <span id="dropTxt">Click or drop a product image</span>
+          </label>
+          <input id="pName" placeholder="Product name" required>
+          <div class="two">
+            <div><label class="lbl">Price before discount <i>(optional)</i></label><input id="pOld" type="number" step="0.01" min="0" placeholder="e.g. 450"></div>
+            <div><label class="lbl">Price after discount <i>(final price)</i></label><input id="pPrice" type="number" step="0.01" min="0" placeholder="e.g. 350" required></div>
+          </div>
+          <textarea id="pDesc" rows="3" placeholder="Description"></textarea>
+          <select id="pBrand" required></select>
+          <select id="pCat" required></select>
+          <label class="lbl">Sizes you have <i>(optional · separate with commas)</i></label>
+          <input id="pSizesIn" placeholder="38, 39, 43, 44, 45   or   S, M, L, XL">
+          <div class="szrow">
+            <button type="button" class="sz" data-fill="shoes">Shoes 36–47</button>
+            <button type="button" class="sz" data-fill="clothes">Clothes S–3XL</button>
+            <button type="button" class="sz" data-fill="">Clear</button>
+          </div>
+          <div id="pSizesPrev" class="szrow prev"></div>
+          <button class="btn" id="pSave">Add product</button>
+        </form>
+      </section>
+
+      <section class="panel glass">
+        <div class="phead"><h3>All products <span id="pCount" class="muted"></span></h3>
+          <button id="optImg" class="btn sm ghost" type="button">Optimize images</button>
+          <input id="pFind" class="find" placeholder="Filter…"></div>
+        <div id="prodList"></div>
+      </section>
+    </div>
+
+    <!-- ORDERS -->
+    <div id="vOrd" class="view hidden">
+      <section class="panel glass">
+        <div class="phead">
+          <div class="subtabs">
+            <button id="oTabP" class="stab on" data-t="pending">Not delivered</button>
+            <button id="oTabD" class="stab" data-t="done">Completed</button>
+          </div>
+          <button id="ordRefresh" class="btn sm ghost">Refresh</button>
+        </div>
+        <div id="ordList"></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div id="toasts"></div>
+<script src="admin.js"></script>
+</body>
+</html>
